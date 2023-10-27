@@ -43,6 +43,7 @@ const LibraryPage = () => {
             >
               Create a Quote
             </Text>
+            <Text>is this working?</Text>
           </View>
         </TouchableHighlight>
       </Link>

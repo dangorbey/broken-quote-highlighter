@@ -2,7 +2,7 @@ import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
 import { Slot, useRouter, useSegments } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { useEffect } from "react";
-import { SafeAreaView, Text } from "react-native";
+
 const CLERK_PUBLIC_KEY = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
 
 const tokenCache = {
@@ -33,7 +33,7 @@ const InitialLayout = () => {
 
     const inTabsGroup = segments[0] === "(auth)";
     if (isSignedIn && !inTabsGroup) {
-      router.replace("/home");
+      router.replace("/library");
     } else if (!isSignedIn) {
       router.replace("/login");
     }

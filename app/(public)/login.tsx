@@ -36,6 +36,18 @@ const LoginPage = () => {
     <View style={styles.container}>
       <Spinner visible={loading} />
 
+      <Text
+        style={{
+          textAlign: "center",
+          fontWeight: "bold",
+          fontSize: 24,
+          marginBottom: 10,
+        }}
+      >
+        Quote Highlighter
+      </Text>
+
+      <Text>Email</Text>
       <TextInput
         autoCapitalize="none"
         placeholder="dan@email.com"
@@ -43,6 +55,7 @@ const LoginPage = () => {
         onChangeText={setEmailAddress}
         style={styles.inputField}
       />
+      <Text>Password</Text>
       <TextInput
         placeholder="password"
         value={password}
@@ -84,6 +97,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 10,
     backgroundColor: "#fff",
+    marginBottom: 20,
   },
   button: {
     margin: 8,

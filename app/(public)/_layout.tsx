@@ -12,3 +12,5 @@ const PublicLayout = () => {
     </Stack>
   );
 };
+
+export default PublicLayout;

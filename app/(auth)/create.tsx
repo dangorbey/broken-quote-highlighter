@@ -2,7 +2,7 @@ import { View, Text } from "react-native";
 import React from "react";
 import { useUser } from "@clerk/clerk-expo";
 
-const HomePage = () => {
+const CreatePage = () => {
   const { user } = useUser();
 
   return (
@@ -14,9 +14,9 @@ const HomePage = () => {
         justifyContent: "center",
       }}
     >
-      <Text>Welcome, {user?.emailAddresses[0].emailAddress}</Text>
+      <Text>Create a Quote</Text>
     </View>
   );
 };
 
-export default HomePage;
+export default CreatePage;

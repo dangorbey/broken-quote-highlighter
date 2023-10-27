@@ -12,7 +12,7 @@ export const LogoutButton = () => {
 
   return (
     <Pressable onPress={doLogout} style={{ marginRight: 10 }}>
-      <Ionicons name="log-out-outline" size={24} color="black" />
+      <Ionicons name="log-out-outline" size={24} color="#fff" />
     </Pressable>
   );
 };

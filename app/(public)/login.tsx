@@ -1,0 +1,92 @@
+import { View, Text, StyleSheet, Button, Pressable } from "react-native";
+import React, { useState } from "react";
+import { useSignIn } from "@clerk/clerk-expo";
+import Spinner from "react-native-loading-spinner-overlay";
+import { TextInput } from "react-native-gesture-handler";
+import { Link } from "expo-router";
+import { OAuthButtons } from "../../components/ OAuth";
+
+const LoginPage = () => {
+  const { signIn, setActive, isLoaded } = useSignIn();
+
+  const [emailAddress, setEmailAddress] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const onSignInPress = async () => {
+    if (!isLoaded) {
+      return;
+    }
+    setLoading(true);
+    try {
+      const completeSignIn = await signIn.create({
+        identifier: emailAddress,
+        password,
+      });
+
+      await setActive({ session: completeSignIn.createdSessionId });
+    } catch (err: any) {
+      alert(err.errors[0].message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Spinner visible={loading} />
+
+      <TextInput
+        autoCapitalize="none"
+        placeholder="dan@email.com"
+        value={emailAddress}
+        onChangeText={setEmailAddress}
+        style={styles.inputField}
+      />
+      <TextInput
+        placeholder="password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+        style={styles.inputField}
+      />
+
+      <Button onPress={onSignInPress} title="Login" color={"#6c47ff"} />
+
+      <Link href="/reset" asChild>
+        <Pressable style={styles.button}>
+          <Text>Forgot Password?</Text>
+        </Pressable>
+      </Link>
+      <Link href="/register" asChild>
+        <Pressable style={styles.button}>
+          <Text>Create Account</Text>
+        </Pressable>
+      </Link>
+      <OAuthButtons />
+    </View>
+  );
+};
+
+export default LoginPage;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+  },
+  inputField: {
+    marginVertical: 4,
+    height: 50,
+    borderWidth: 1,
+    borderColor: "#6c47ff",
+    borderRadius: 4,
+    padding: 10,
+    backgroundColor: "#fff",
+  },
+  button: {
+    margin: 8,
+    alignItems: "center",
+  },
+});

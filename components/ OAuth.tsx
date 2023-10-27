@@ -1,17 +1,30 @@
 import * as WebBrowser from "expo-web-browser";
 import { useWarmUpBrowser } from "../hooks/useWarmUpBrowser";
 import { useOAuth } from "@clerk/clerk-expo";
-import { useCallback } from "react";
+import { ComponentProps, useCallback } from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Ionicons } from "@expo/vector-icons";
+import type { OAuthStrategy } from "@clerk/types";
+
+type IoniconName = ComponentProps<typeof Ionicons>["name"];
 
 WebBrowser.maybeCompleteAuthSession();
 
-export function OAuthButtons() {
+interface OAuthProps {
+  authStrat: OAuthStrategy;
+  buttonName: string;
+  buttonLogo: IoniconName;
+}
+
+export function OAuthButtons({
+  authStrat,
+  buttonName,
+  buttonLogo,
+}: OAuthProps) {
   useWarmUpBrowser();
 
-  const { startOAuthFlow } = useOAuth({ strategy: "oauth_google" });
+  const { startOAuthFlow } = useOAuth({ strategy: authStrat });
 
   const onPress = useCallback(async () => {
     try {
@@ -32,8 +45,8 @@ export function OAuthButtons() {
 
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
-      <Ionicons name="logo-google" color={"#fff"} />
-      <Text style={styles.buttonText}>Sign in with Google</Text>
+      <Ionicons name={buttonLogo} color={"#fff"} />
+      <Text style={styles.buttonText}>{buttonName}</Text>
     </TouchableOpacity>
   );
 }

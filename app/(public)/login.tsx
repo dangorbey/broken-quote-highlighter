@@ -76,7 +76,16 @@ const LoginPage = () => {
           <Text>Create Account</Text>
         </Pressable>
       </Link>
-      <OAuthButtons />
+      <OAuthButtons
+        authStrat="oauth_google"
+        buttonLogo="logo-google"
+        buttonName="Sign in with Google"
+      />
+      <OAuthButtons
+        authStrat="oauth_apple"
+        buttonLogo="logo-apple"
+        buttonName="Sign in with Apple"
+      />
     </View>
   );
 };

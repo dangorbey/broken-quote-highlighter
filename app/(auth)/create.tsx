@@ -18,19 +18,19 @@ import { TextEditor } from "../../components/TextEditor";
 const CreatePage = () => {
   const { user } = useUser();
 
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  // const [isModalVisible, setIsModalVisible] = useState(false);
 
-  function handleModalOpen() {
-    setIsModalVisible(true); // Just closing the modal without saving
-  }
-  function handleModalClose() {
-    setIsModalVisible(false); // Just closing the modal without saving
-  }
+  // function handleModalOpen() {
+  //   setIsModalVisible(true); // Just closing the modal without saving
+  // }
+  // function handleModalClose() {
+  //   setIsModalVisible(false); // Just closing the modal without saving
+  // }
 
-  function handleSave(newQuote: string) {
-    setQuote(newQuote); // Updating the quote
-    setIsModalVisible(false); // Closing the modal after saving
-  }
+  // function handleSave(newQuote: string) {
+  //   setQuote(newQuote); // Updating the quote
+  //   setIsModalVisible(false); // Closing the modal after saving
+  // }
 
   const [quote, setQuote] = useState(
     `There is an entry in Baudelaire' Journal Intime that is fearful in the precision of its cynicism: "One must work, if not from taste then at least from despair. For, to reduce everything to a single truth: work is less boring than pleasure.`
@@ -86,35 +86,6 @@ const CreatePage = () => {
     );
   };
 
-  const getUserInput = () => {
-    Alert.prompt(
-      "Create a Quote",
-      "What is your quote?",
-      [
-        {
-          text: "Cancel",
-          onPress: () => console.log("Cancel Pressed"),
-          style: "cancel",
-        },
-        {
-          text: "Create",
-          onPress: (quote) => {
-            console.log("OK Pressed, quote: " + quote);
-            if (quote !== undefined) {
-              setQuote(quote);
-            }
-          },
-        },
-      ],
-      undefined,
-      quote
-    );
-  };
-
-  // useEffect(() => {
-  //   getUserInput();
-  // }, []);
-
   return (
     <View
       style={{
@@ -147,21 +118,21 @@ const CreatePage = () => {
       </ImageBackground>
 
       <View style={{ flexDirection: "row", gap: 20 }}>
-        <TouchableOpacity style={styles.shareButton} onPress={handleModalOpen}>
+        {/* <TouchableOpacity style={styles.shareButton} onPress={handleModalOpen}>
           <Text style={styles.shareButtonText}>Edit</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity style={styles.shareButton} onPress={shareDummyImage}>
           <Text style={styles.shareButtonText}>Share</Text>
         </TouchableOpacity>
         {/* <Button onPress={getUserInput} title="Edit Quote" /> */}
         {/* <Button onPress={shareDummyImage} title="Save Quote" /> */}
       </View>
-      <TextEditor
+      {/* <TextEditor
         quote={quote}
         isVisible={isModalVisible}
         onClose={handleModalClose}
         onSave={handleSave}
-      />
+      /> */}
     </View>
   );
 };

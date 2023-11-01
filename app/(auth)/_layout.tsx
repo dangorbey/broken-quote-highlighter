@@ -64,7 +64,7 @@ const TabsPage = () => {
         listeners={() => ({
           tabPress: (e) => {
             e.preventDefault();
-            router.push("/(modals)/createmodal"); // <-- Here you put the name where the chat component is declared
+            router.push("/profile"); // <-- Here you put the name where the chat component is declared
           },
         })}
       />

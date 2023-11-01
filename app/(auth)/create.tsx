@@ -6,15 +6,32 @@ import {
   ImageBackground,
   StyleSheet,
   TouchableOpacity,
+  TouchableHighlight,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 import { useUser } from "@clerk/clerk-expo";
 import { CreateCanvas } from "../../components/CreateCanvas";
 import { captureRef } from "react-native-view-shot";
 import * as Sharing from "expo-sharing";
+import { TextEditor } from "../../components/TextEditor";
 
 const CreatePage = () => {
   const { user } = useUser();
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+
+  function handleModalOpen() {
+    setIsModalVisible(true); // Just closing the modal without saving
+  }
+  function handleModalClose() {
+    setIsModalVisible(false); // Just closing the modal without saving
+  }
+
+  function handleSave(newQuote: string) {
+    setQuote(newQuote); // Updating the quote
+    setIsModalVisible(false); // Closing the modal after saving
+  }
+
   const [quote, setQuote] = useState(
     `There is an entry in Baudelaire' Journal Intime that is fearful in the precision of its cynicism: "One must work, if not from taste then at least from despair. For, to reduce everything to a single truth: work is less boring than pleasure.`
   );
@@ -94,9 +111,9 @@ const CreatePage = () => {
     );
   };
 
-  useEffect(() => {
-    getUserInput();
-  }, []);
+  // useEffect(() => {
+  //   getUserInput();
+  // }, []);
 
   return (
     <View
@@ -130,7 +147,7 @@ const CreatePage = () => {
       </ImageBackground>
 
       <View style={{ flexDirection: "row", gap: 20 }}>
-        <TouchableOpacity style={styles.shareButton} onPress={getUserInput}>
+        <TouchableOpacity style={styles.shareButton} onPress={handleModalOpen}>
           <Text style={styles.shareButtonText}>Edit</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.shareButton} onPress={shareDummyImage}>
@@ -139,6 +156,12 @@ const CreatePage = () => {
         {/* <Button onPress={getUserInput} title="Edit Quote" /> */}
         {/* <Button onPress={shareDummyImage} title="Save Quote" /> */}
       </View>
+      <TextEditor
+        quote={quote}
+        isVisible={isModalVisible}
+        onClose={handleModalClose}
+        onSave={handleSave}
+      />
     </View>
   );
 };

@@ -5,10 +5,11 @@ import {
   StyleSheet,
   TouchableHighlight,
 } from "react-native";
-import React from "react";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import { useUser } from "@clerk/clerk-expo";
 import { Link } from "expo-router";
 import { Ionicons } from "@expo/vector-icons";
+import { TextEditor } from "../../components/TextEditor";
 
 const LibraryPage = () => {
   const { user } = useUser();
@@ -23,6 +24,17 @@ const LibraryPage = () => {
     } else {
       return user?.emailAddresses[0].emailAddress;
     }
+  };
+
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [showAppOptions, setShowAppOptions] = useState(false);
+
+  const onAddSticker = () => {
+    setIsModalVisible(true);
+  };
+
+  const onModalClose = () => {
+    setIsModalVisible(false);
   };
 
   return (
@@ -72,5 +84,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     gap: 10,
+  },
+  contentContainer: {
+    flex: 1,
+    alignItems: "center",
   },
 });

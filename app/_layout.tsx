@@ -1,5 +1,5 @@
 import { ClerkProvider, useAuth } from "@clerk/clerk-expo";
-import { Slot, useRouter, useSegments } from "expo-router";
+import { Slot, Stack, useRouter, useSegments } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import { useEffect } from "react";
 

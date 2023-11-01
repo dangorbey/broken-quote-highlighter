@@ -1,7 +1,7 @@
 import { useAuth } from "@clerk/clerk-expo";
 import { Ionicons } from "@expo/vector-icons";
-import { Pressable } from "react-native";
-import { Tabs } from "expo-router";
+import { Button, Pressable } from "react-native";
+import { Slot, Stack, Tabs, router } from "expo-router";
 
 export const LogoutButton = () => {
   const { signOut } = useAuth();
@@ -61,6 +61,12 @@ const TabsPage = () => {
           headerRight: () => <LogoutButton />,
         }}
         redirect={!isSignedIn}
+        listeners={() => ({
+          tabPress: (e) => {
+            e.preventDefault();
+            router.push("/(modals)/createmodal"); // <-- Here you put the name where the chat component is declared
+          },
+        })}
       />
     </Tabs>
   );

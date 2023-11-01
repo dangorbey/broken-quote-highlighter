@@ -4,7 +4,7 @@ import { useSignIn } from "@clerk/clerk-expo";
 import Spinner from "react-native-loading-spinner-overlay";
 import { TextInput } from "react-native-gesture-handler";
 import { Link } from "expo-router";
-import { OAuthButtons } from "../../components/ OAuth";
+import { OAuthButtons } from "../../components/OAuth";
 
 const LoginPage = () => {
   const { signIn, setActive, isLoaded } = useSignIn();
@@ -101,7 +101,6 @@ const styles = StyleSheet.create({
   inputField: {
     marginVertical: 4,
     height: 50,
-    borderWidth: 1,
     borderColor: "#6c47ff",
     borderRadius: 4,
     padding: 10,
